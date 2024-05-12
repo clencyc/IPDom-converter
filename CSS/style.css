@@ -1,0 +1,43 @@
+body{
+    background-color: black;
+    color: white;
+}
+.nav {
+    border-bottom: 2px solid white;
+}
+h1 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.ip-dom {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set the parent container's height to 100% viewport height */
+}
+input{
+    height: 50px;
+    width: 50%;
+}
+input::placeholder {
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+button {
+    font-family: Roboto, sans-serif;
+    color: black;
+    height: 50px;
+    width: 120px;
+    border: solid yellow 2px;
+    border-radius: 20px;
+    box-shadow: white;
+}
+button:hover {
+    background-color: yellow;
+    color: black;
+}
+footer {
+    text-align: center;
+    border-top: 2px solid white;
+    height: 100px;
+}
