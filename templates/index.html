@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPDom Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        footer {
+            text-align: center;
+            border-top: 2px solid white;
+            position:absolute;
+            bottom: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e9e9e9;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IP and Domain Converter</h1>
+        <select id="conversionType">
+            <option value="ip_to_domain">IP to Domain</option>
+            <option value="domain_to_ip">Domain to IP</option>
+        </select>
+        <input type="text" id="inputValue" placeholder="Enter IP or Domain">
+        <button onclick="convert()">Convert</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; 2022 IPDOM. All rights reserved</p>
+
+    </footer>
+
+    <script>
+        async function convert() {
+            const type = document.getElementById('conversionType').value;
+            const input = document.getElementById('inputValue').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.innerHTML = 'Converting...';
+
+            const response = await fetch('/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ type, input })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                resultDiv.innerHTML = 'Result: ' + data.result;
+            } else {
+                resultDiv.innerHTML = 'Error: ' + data.error;
+                resultDiv.classList.add('error');
+            }
+        }
+    </script>
+</body>
+</html>
